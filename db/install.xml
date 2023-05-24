@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/test/db" VERSION="20230519" COMMENT="XMLDB file for Moodle mod_test"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="test" COMMENT="Stores the test activity module instances.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="ID of the course this activity is part of."/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="The name of the activity module instance"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Timestamp of when the instance was added to the course."/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Timestamp of when the instance was last modified."/>
+        <FIELD NAME="intro" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Activity description."/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="The format of the intro field."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="fk_course" TYPE="foreign" FIELDS="course" REFTABLE="course" REFFIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="exam_phases" COMMENT="each record is one exam phase">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+				<FIELD NAME="cm_id" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true" />
+				<FIELD NAME="phase_id" SEQUENCE="false" TYPE="int" LENGTH="10" NOTNULL="true" />
+				<FIELD NAME="phase_type" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" />
+				<FIELD NAME="description" TYPE="text" NOTNULL="true" SEQUENCE="false" />
+				<FIELD NAME="serial" SEQUENCE="false" TYPE="int" LENGTH="11" NOTNULL="true" />
+				<FIELD NAME="is_first" SEQUENCE="false" TYPE="int" NOTNULL="true" LENGTH="2" />
+				<FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+				<FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+			</FIELDS>
+			<KEYS>
+				<KEY NAME="primary" FIELDS="id" TYPE="primary" />
+				<KEY NAME="phase_id" FIELDS="phase_id" TYPE="foreign" REFTABLE="test" REFFIELDS="id" />
+			</KEYS>
+			<INDEXES>
+				<INDEX NAME="id" FIELDS="id" UNIQUE="true" />
+			</INDEXES>
+		</TABLE>
+
+    <TABLE NAME="exam_question" COMMENT="each record is one mcq questions of a phase">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+				<FIELD NAME="phase_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+				<FIELD NAME="question_title" TYPE="text" NOTNULL="true" SEQUENCE="false" />
+				<FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+				<FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+			</FIELDS>
+			<KEYS>
+				<KEY NAME="primary" FIELDS="id" TYPE="primary" />
+				<KEY NAME="phase_id" FIELDS="phase_id" TYPE="foreign" REFTABLE="exam_phases" REFFIELDS="id" />
+			</KEYS>
+			<INDEXES>
+				<INDEX NAME="id" FIELDS="id" UNIQUE="true" />
+			</INDEXES>
+		</TABLE>
+		<TABLE NAME="question_options" COMMENT="each record is a decission option of an mcq">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+				<FIELD NAME="question_id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" />
+				<FIELD NAME="option_title" TYPE="text" NOTNULL="true" SEQUENCE="false" />
+				<FIELD NAME="is_valid" TYPE="int" LENGTH="2" DEFAULT="0" NOTNULL="true" SEQUENCE="false" />
+				<FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+				<FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" />
+			</FIELDS>
+			<KEYS>
+				<KEY NAME="primary" FIELDS="id" TYPE="primary" />
+				<KEY NAME="question_id" FIELDS="question_id" TYPE="foreign" REFTABLE="exam_question" REFFIELDS="id" />
+			</KEYS>
+			<INDEXES>
+				<INDEX NAME="id" FIELDS="id" UNIQUE="true" />
+			</INDEXES>
+		</TABLE>
+  </TABLES>
+</XMLDB>

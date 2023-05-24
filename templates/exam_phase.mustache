@@ -1,0 +1,58 @@
+{{!
+This file is part of Moodle - http://moodle.org/
+
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
+}}
+{{!
+@template mod_test/cat
+
+
+Example context (json):
+{
+
+}
+}}
+{{ < core/modal }} <h1 class="title"> Exam Control Panel</h1>
+    <table class="table table-bordered">
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-info align-right" href="{{addPhase}}?phase_id={{phase_id}}&courseModule_id={{cm_id}}">Add Phase</a>
+        </div>
+        <hr>
+        <thead></thead>
+        <tbody>
+            {{#info}}
+            <div class="card  p-2">
+                <div class="card-text">
+                    <p class="text-uppercase fw-bolder bg-info text-light p-2 rounded">Phase: {{phase_id}} | Phase Type: {{phase_type}}</p>
+                </div>
+
+                {{description}}
+                <div class="d-flex justify-content-center m-2">
+                    <a href="{{addPhase}}?phase_id={{phase_id}}&eid={{id}}" class="btn btn-info m-2">Edit</a>
+                    <a href="{{pageLink}}?courseModule_id={{cm_id}}&phase_id={{phase_id}}&delid={{id}}"
+                        class="btn btn-danger m-2">Delete</a>
+                    <a href="{{showQues}}?courseModule_id={{cm_id}}&phase_id={{phase_id}}&qid={{id}}"
+                        class="btn btn-info m-2">Show Question</a>
+
+                </div>
+            </div>
+
+
+
+
+            {{/info}}
+
+        </tbody>
+    </table>

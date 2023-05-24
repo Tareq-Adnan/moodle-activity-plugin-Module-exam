@@ -1,0 +1,34 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle. If not, see
+    <http: //www.gnu.org/licenses />.
+    }}
+{{!
+@template mod_test/cat
+
+
+    Example context (json):
+    {
+
+    }
+    }}
+{{ < core/modal }}
+
+<div class="d-flex">
+  <a class="text-decoration-none" href="{{editTest_url}}?courseModule_id={{cm_id}}&phase_id={{phase_id}}"><div class="bg-info text-white p-4 shadow">{{editTest}}</div></a>
+  <a class="text-decoration-none" href="{{score_url}}"><div <div class="bg-info text-white p-4">{{score}}</div></a>
+  <a class="text-decoration-none" href="{{attempt_url}}?courseModule_id={{cm_id}}"> <div <div class="bg-info text-white p-4">{{attemptT0Test}}</div></a>
+    
+</div>
