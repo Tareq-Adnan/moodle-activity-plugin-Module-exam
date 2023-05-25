@@ -114,7 +114,8 @@ if($addOp!=0 || $editQuestionOption ){
     }
     else if($formData=$addForm->get_data()){
         $data=new stdClass();
-        if($editQuestionOption){
+
+        if($editQuestionOption !=0){
             $data->question_id=$vid;
         }else{
             $data->question_id=$addOp;
@@ -123,7 +124,7 @@ if($addOp!=0 || $editQuestionOption ){
         $data->option_title=$formData->option_title;
         $data->is_valid=$formData->is_valid;
 
-        if($formData->id !=""){
+        if($formData->id){
            
             $data->id=$formData->id;
             $data->timemodified=time();

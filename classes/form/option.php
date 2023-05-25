@@ -10,7 +10,7 @@ class option extends moodleform
         global $CFG;
 
         $mform = $this->_form; // Don't forget the underscore!
-        $mform->addElement('text','id');
+        $mform->addElement('hidden','id');
         $mform->setType('id',PARAM_INT);
 
         $mform->addElement('text',  'option_title', "Option title");
